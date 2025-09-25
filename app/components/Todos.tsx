@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { TodoComponent } from "./TodoComponent"
 import { TodoInput } from "./TodoInput"
 import { useTodoStore } from "@/store/todoStore"
-import { addToTodosField, checkTodo, getTodosField, getTodosinField } from "../actions/user"
+import { addToTodosField, checkTodo, getTodosinField } from "../actions/user"
 import { useInTodoStore } from "@/store/todosinStore"
 interface todosprops{
     label:string,
@@ -12,9 +12,6 @@ interface todosprops{
     inField:boolean,
     checked:boolean
 }
-
-
-type Todolist = todosprops[]
 
 
 export const Todos = ()=>{
@@ -57,29 +54,28 @@ export const Todos = ()=>{
     }
  }
 
+ async function flushTodos() {
+    for (const item of todos) {
+        if (item.checked) {
+            deleteinstore(item.id)
+            const todo = await addToTodosField(item.id)
+            addTodos(todo)
+        }
+    }
+}
+
     
     return <div className="flex flex-col items-center">
         <div className="font-bold text-3xl lg:text-4xl ">Todos</div>
 
         <div className="border h-64 w-64">
-            <button className="bg-pink-400 text-white hover:bg-pink-500 cursor-pointer" onClick={()=>{
-                todos.map(async(item)=>{
-                    if(item.checked==true){
-                        deleteinstore(item.id)
-                        const todo = await addToTodosField(item.id)
-                        addTodos(todo)
-                        console.log(todos)
-                    }else{
-                        item
-                    }
-                })
-            }}>flush</button>
+            <button className="bg-pink-400 text-white hover:bg-pink-500 cursor-pointer" onClick={flushTodos}>flush</button>
             {todos.map((Todo) =>
-            <TodoComponent key={Todo.id}  label={Todo.label} checked={Todo.checked} onCheck={async()=>{
-                            let id = todos.filter(item => item.id === Todo.id)[0].id
-                            const todo = await checkTodo(id)
-                            checkTodosinStore(id)
-                        }} />)}
+            <TodoComponent key={Todo.id}  label={Todo.label} checked={Todo.checked} onCheck={
+            async()=>{
+                await checkTodo(Todo.id)
+                checkTodosinStore(Todo.id)
+            }} />)}
             
             
         </div>

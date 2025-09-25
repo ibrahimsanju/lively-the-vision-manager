@@ -26,7 +26,7 @@ export const Goals = ({label,id}:goalsprops)=>{
             setGoals(monthly.map(month =>({label:month.label,id:month.id,goalId:month.userId})))
         }
         fetchMonthly(id)
-    },[])
+    },[id])
 
     console.log(goals)
 

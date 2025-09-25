@@ -1,7 +1,6 @@
 "use server"
 
 import prisma from "@/db";
-import { error } from "console";
 import { getServerSession } from "next-auth";
 
 export async function addVision(vision:string) {
@@ -203,7 +202,8 @@ export async function deleteWeekly(id:string) {
     })
 
     return {
-        msg:"successfully deleted"
+        msg:"successfully deleted",
+
     }
 
 }

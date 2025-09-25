@@ -2,7 +2,6 @@
 import { useRouter } from "next/navigation"
 import { LabelledInputs } from "./LabelledInputs"
 import { useState } from "react"
-import axios from "axios"
 export const Signin = ()=>{
      const [username,setUsername] = useState("")
      const [password,setPassword] = useState("")

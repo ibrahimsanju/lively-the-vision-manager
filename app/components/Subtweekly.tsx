@@ -1,5 +1,5 @@
 import { useWeeklyStore } from "@/store/weeklyStore"
-import { addToWeeklyField, addWeekly } from "../actions/user"
+import { addToWeeklyField } from "../actions/user"
 import { useweeklyOutFieldStore } from "@/store/monthlyStore"
 import { WeeklyTodos } from "./weeklyTodos"
 

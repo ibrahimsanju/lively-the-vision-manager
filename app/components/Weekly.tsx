@@ -14,7 +14,6 @@ interface weeklyProps{
     id:string
 }
 
-type Weeklyslist = weeklysProps[]
 
 export const Weekly = ({id}:weeklyProps)=>{
 
@@ -41,7 +40,7 @@ export const Weekly = ({id}:weeklyProps)=>{
         return ()=>{
             isMounted = false
         }
-    },[])
+    },[id])
 
     console.log({weeklys})
 

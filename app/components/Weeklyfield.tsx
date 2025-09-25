@@ -1,28 +1,31 @@
 "use client"
 import { useWeeklyStore } from "@/store/weeklyStore"
 import { WeeklyFieldComp } from "./WeeklyFieldComp"
-import { useState,useEffect } from "react"
+import { useEffect } from "react"
 import { getWeeklyField } from "../actions/user"
-import { useweeklyOutFieldStore } from "@/store/monthlyStore"
 import { WeeklyTodos } from "./weeklyTodos"
 interface WeeklyFieldCompProps{
     label:string,
     id?:string
 }
 
-type WeeklysList = WeeklyFieldCompProps[]
 
 export const Weeklyfield = ()=>{
     const weeklys = useWeeklyStore((state)=>state.weeklys)
     const setWeeklys = useWeeklyStore((state)=>state.setWeekly)
 
-    useEffect(()=>{
-        async function fetchWeekly(){
-            const weekly = await getWeeklyField()
-            setWeeklys(weekly)
-        }
-        fetchWeekly()
-    },[])
+    useEffect(() => {
+    let isMounted = true;
+
+    async function fetchWeekly() {
+        const weekly = await getWeeklyField();
+        if (isMounted) setWeeklys(weekly);
+    }
+
+    fetchWeekly();
+
+    return () => { isMounted = false };
+}, [])
 
 
 

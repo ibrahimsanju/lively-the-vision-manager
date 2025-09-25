@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { addToWeeklyField, deleteWeekly, getWeekly, getWeeklyField } from "../actions/user"
+import { addToWeeklyField, deleteWeekly, getWeeklyField } from "../actions/user"
 import { useWeeklyStore } from "@/store/weeklyStore"
 import { useweeklyOutFieldStore } from "@/store/monthlyStore"
 interface WeeklyFieldCompProps{
@@ -15,12 +15,12 @@ export const WeeklyFieldComp = ({label,id}:WeeklyFieldCompProps)=>{
      const deleWeeklyinField = useWeeklyStore((state)=>state.deleteWeekly)
      const addWeeklyoutField = useweeklyOutFieldStore((state)=>state.addWeekly)
 
-    useEffect(()=>{
-        async function fetchWeekly() {
-            const w = await getWeeklyField()
-            setWeeklys(weeklys.map(weekly=>({label:weekly.label,id:weekly.id})))
-        }
-    })
+    // useEffect(()=>{
+    //     async function fetchWeekly() {
+    //         const w = await getWeeklyField()
+    //         setWeeklys(weeklys.map(weekly=>({label:weekly.label,id:weekly.id})))
+    //     }
+    // })
 
     return <div className="flex">
         <h4>

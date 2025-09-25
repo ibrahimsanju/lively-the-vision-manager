@@ -1,14 +1,14 @@
-import { lazy, useEffect, useState } from "react"
+import {  useEffect, useState } from "react"
 import { TodoComponent } from "./TodoComponent"
 import { useTodoStore } from "@/store/todoStore"
 import { addTodos, addToTodosField, checkTodo, getTodosField } from "../actions/user"
 import { useInTodoStore } from "@/store/todosinStore"
 
-interface weeklyListProps{
-    label:string,
-    weeklyId?:string,
-    checked:boolean
-}
+// interface weeklyListProps{
+//     label:string,
+//     weeklyId?:string,
+//     checked:boolean
+// }
 
 interface todosinterface {
     id: string;
@@ -23,9 +23,6 @@ interface weeklyTodosProps{
     id:string
 }
 
-
-
-type Todoslist = todosinterface[]
 
 
 export const WeeklyTodos = ({id}:weeklyTodosProps)=> {
@@ -52,7 +49,7 @@ export const WeeklyTodos = ({id}:weeklyTodosProps)=> {
         return ()=>{
             isMounted = false
         }
-    },[])
+    },[id])
 
     console.log({storeTodos:Todos})
 
@@ -68,9 +65,8 @@ export const WeeklyTodos = ({id}:weeklyTodosProps)=> {
                 deleteTodo(to)
                 addinTodoStore(to)
             }} onCheck={async()=>{
-                let id = Todos.filter(item => item.id === t.id)[0].id
-                const todo = await checkTodo(id)
-                checkTodoStore(id)
+                await checkTodo(t.id)
+                checkTodoStore(t.id)
             }} checked={t.checked} ></TodoComponent>)}
         </div>
         
