@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  // Optional for WebAuthn support
+  Authenticator Authenticator[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  vision String @default("")
+  goals Goals[]
+  monthly       Monthly[]
+  weekly        Weekly[]
+  todos         Todos[]
+
+}
+
+model Goals{
+   id            String          @id @default(cuid())
+   label String
+   useremail String
+   User User @relation(fields: [useremail],references: [email])
+   monthly Monthly[]
+   
+}
+
+model Monthly{
+  id            String          @id @default(cuid())
+  label String
+  userId String
+  useremail String
+  User User @relation(fields: [useremail],references: [email])
+  Goals Goals @relation(fields: [userId],references: [id])
+  weekly Weekly[]
+}
+
+model Weekly{
+  id            String          @id @default(cuid())
+  label String
+  monthlyId String
+  useremail String
+  User User @relation(fields: [useremail],references: [email])
+  inField Boolean @default(false)
+  Monthly Monthly @relation(fields: [monthlyId],references: [id])
+  todos Todos[]
+}
+
+model Todos{
+  id  String @id @default(cuid())
+  label String
+  checked Boolean @default(false)
+  inTodos Boolean @default(false)
+  weeklyId String
+  Weekly Weekly @relation(fields: [weeklyId],references: [id], onDelete:Cascade)
+  useremail String
+  User User @relation(fields: [useremail],references: [email])
+}
+
+
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
+}
+ 
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([userId, credentialID])
+}
+
