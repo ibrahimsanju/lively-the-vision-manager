@@ -37,7 +37,7 @@ model Goals{
    id            String          @id @default(cuid())
    label String
    useremail String
-   User User @relation(fields: [useremail],references: [email])
+   User User @relation(fields: [useremail],references: [email],onDelete: Cascade)
    monthly Monthly[]
    
 }
@@ -48,7 +48,7 @@ model Monthly{
   userId String
   useremail String
   User User @relation(fields: [useremail],references: [email])
-  Goals Goals @relation(fields: [userId],references: [id])
+  Goals Goals @relation(fields: [userId],references: [id],onDelete:Cascade)
   weekly Weekly[]
 }
 
@@ -59,7 +59,7 @@ model Weekly{
   useremail String
   User User @relation(fields: [useremail],references: [email])
   inField Boolean @default(false)
-  Monthly Monthly @relation(fields: [monthlyId],references: [id])
+  Monthly Monthly @relation(fields: [monthlyId],references: [id],onDelete:Cascade)
   todos Todos[]
 }
 

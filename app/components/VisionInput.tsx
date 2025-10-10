@@ -21,7 +21,7 @@ export const Visioninput = ()=>{
 
 
     return <div className="flex flex-col">
-        <textarea name="" id="" className="" placeholder={placeholder||"write your vision"} onChange={(e)=>setVision(e.target.value)} ></textarea>
+        <textarea name="" id="" className="text-center" placeholder={placeholder||"write your vision"} onChange={(e)=>setVision(e.target.value)} ></textarea>
         <button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer"onClick={()=>{setPlaceholder(vision);addVision(vision);}}>setvision</button>
     </div>
 }

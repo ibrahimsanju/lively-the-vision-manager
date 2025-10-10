@@ -1,43 +1,51 @@
 import { useEffect, useState } from "react"
-import { addMonthly, getMonthly } from "../actions/user"
+import { addMonthly, deleteGoal, getMonthly } from "../actions/user"
 import { Monthly } from "./Monthly"
+import { useGoalOutFieldStore } from "@/store/goalStore"
+import { useVisionOutFieldStore } from "@/store/visionStore"
 
 interface goalsprops{
     label:string,
     id:string,
 }
 
-interface goalslistprops{
-    label:string,
-    goalId:string,
-    id:string
-
-}
-
-type Goalslist = goalslistprops[]
 
 export const Goals = ({label,id}:goalsprops)=>{
-    const [goals,setGoals] = useState<Goalslist>([])
+    const goals = useGoalOutFieldStore((state)=>state.GoalOutFields)
+    const setGoals = useGoalOutFieldStore((state)=>state.setGoal)
+    const addGoal = useGoalOutFieldStore((state)=>state.addGoal)
+    const deleteMainGoal = useVisionOutFieldStore((state)=>state.deleteVision)
     const [goal,setGoal] = useState("")
 
     useEffect(()=>{
+        let isMounted = true
         async function fetchMonthly(id:string) {
+
             const monthly = await getMonthly(id)
-            setGoals(monthly.map(month =>({label:month.label,id:month.id,goalId:month.userId})))
+            if(isMounted){
+                setGoals(monthly)
+            }
+           
         }
         fetchMonthly(id)
+        return ()=>{
+        isMounted = false
+        }
     },[id])
 
-    console.log(goals)
+    console.log({MONTHLYGOALLLSSS:goals})
 
     return <div className="flex flex-col">
-        {label}
+        <div className="flex space-x-1">
+            <div>{label}</div>
+            <button className="bg-red-400 text-white hover:bg-red-500 cursor-pointer" onClick={async ()=>{const g = await deleteGoal(id);deleteMainGoal(id)}}>delete</button>
+        </div>
         
         <div>
             <input type="text" placeholder="write your monthly goals" className="border border-black" onChange={(e)=>setGoal(e.target.value)}/>
-            <button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer" onClick={async()=>{const g = await addMonthly(goal,id); setGoals([...goals,{label:g.label,id:g.id,goalId:g.goalId}])}}>add me</button>
+            <button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer" onClick={async()=>{const g = await addMonthly(goal,id); addGoal({label:g.label,id:g.id,userId:g.goalId})}}>add me</button>
             <div className="border-black border my-3">
-                {goals.map((goal)=><Monthly key={goal.id} MonthlyId={goal.id} label={goal.label}></Monthly>)}
+                {goals.filter(item=>item.userId === id).map((goal)=><Monthly key={goal.id} MonthlyId={goal.id} label={goal.label}></Monthly>)}
             </div>
         </div>
         

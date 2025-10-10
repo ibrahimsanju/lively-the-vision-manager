@@ -49,6 +49,19 @@ export async function addGoal(label:string){
     return {label:user.label,id:user.id}
 }
 
+export async function deleteGoal(id:string){
+    const session = await getServerSession()
+    if(!session?.user?.email){
+        throw new Error("User not permitted")
+    }
+    const monthly = await prisma.goals.delete({
+        where:{
+            id,
+            useremail:session.user.email
+        }
+    })
+}
+
 export async function getGoals() {
     const session = await getServerSession()
     if(!session?.user?.email){
@@ -60,7 +73,7 @@ export async function getGoals() {
         },
          select:{
             label:true,
-            id:true
+            id:true,
          }
     })
 
@@ -102,6 +115,19 @@ export async function getMonthly(userId:string) {
     })
 
     return monthly
+}
+
+export async function deleteMonthly(id:string){
+    const session = await getServerSession()
+    if(!session?.user?.email){
+        throw new Error("User not permitted")
+    }
+    const monthly = await prisma.monthly.delete({
+        where:{
+            id,
+            useremail:session.user.email
+        }
+    })
 }
 
 export async function addWeekly(label:string,monthlyId:string){

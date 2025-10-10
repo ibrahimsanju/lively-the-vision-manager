@@ -80,9 +80,9 @@ export const Todos = ()=>{
             
         </div>
         <div>
-            <TodoInput onChange={(e)=>{
+            {/* <TodoInput onChange={(e)=>{
                 setTask(e.target.value)
-            }} onClick={addTask}/>
+            }} onClick={addTask}/> */}
 
         </div>
 
