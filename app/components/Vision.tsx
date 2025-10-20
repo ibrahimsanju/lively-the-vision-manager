@@ -30,23 +30,23 @@ export const Vision = ()=>{
     },[])
 
     console.log({goals})
-    return <div>
-    <div className="flex flex-col items-center p-5">
+    return <div >
+    <div className="flex flex-col items-center py-10 ">
         <div className="text-2xl font-bold">Vision</div>
         <Visioninput></Visioninput>
         <div>
         <input type="text" placeholder="write your main goals" className="border border-black" onChange={(e)=>setGoal(e.target.value)} />
         <button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id})}} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</button>
         </div>
-        
+    </div>
         <div>
             
-            <div>
+            <div className="">
                 {goals.map((goal)=><Goals id={goal.id} label={goal.label} key={goal.id}/>)}
             </div>
         </div>
         
-    </div>
+    
 
     </div> 
 }

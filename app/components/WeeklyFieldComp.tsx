@@ -27,7 +27,7 @@ export const WeeklyFieldComp = ({label,id}:WeeklyFieldCompProps)=>{
             {label}
         </h4>
         <div>
-            <button className="bg-green-400 hover:bg-green-500 text-white"onClick={async()=>{ const w = await addToWeeklyField(id); addWeeklyoutField(w);deleWeeklyinField(w.id);}}>add to monthly</button>
+            <button className="bg-green-400 hover:bg-green-500 text-white"onClick={async()=>{ const w = await addToWeeklyField(id); addWeeklyoutField(w);deleWeeklyinField(w.id);}}>add </button>
             <button className="bg-red-400 hover:bg-red-500 text-white" onClick={async()=>{await deleteWeekly(id); deleWeeklyinField(id);}}>delete</button>
         </div>
     </div>

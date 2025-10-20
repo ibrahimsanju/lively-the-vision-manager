@@ -44,12 +44,15 @@ export const Weekly = ({id}:weeklyProps)=>{
 
     console.log({weeklys})
 
-    return <div className="flex flex-col">
+
+
+    return <div className="flex flex-col pl-2 " id={id}>
         <div>
-            <input type="text" className="border" onChange={(e)=>setWeekly(e.target.value)}/>
+            
+            <input type="text" className="border" placeholder="write weekly goals" onChange={(e)=>setWeekly(e.target.value)}/>
             <button onClick={async()=>{const w= await addWeekly(weekly,id);  addToWeekly({label:w.label,monthlyId:w.monthlyId,id:w.id})}} className="bg-green-400 hover:bg-green-500 text-white">add</button>
         </div>
-        <div className="border border-black h-64 w-64" key='weekly'>
+        <div className="h-64 w-64" key='weekly'>
             {weeklys.filter(item => item.monthlyId === id).map(weekly=><Subweekly label={weekly.label} key={weekly.id} id={weekly.id}></Subweekly>)}
         </div>
     </div>

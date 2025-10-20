@@ -31,12 +31,13 @@ export const useweeklyOutFieldStore = create<weeklyOutFieldState>((set)=>({
     }
     return {
       weeklyOutFields: [
-        ...state.weeklyOutFields,
         {
           label: weekly.label,
           id: weekly.id,
           monthlyId: weekly.monthlyId,
         },
+        ...state.weeklyOutFields,
+        
       ],
     };
   }),

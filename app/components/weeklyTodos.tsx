@@ -53,10 +53,10 @@ export const WeeklyTodos = ({id}:weeklyTodosProps)=> {
 
     console.log({storeTodos:Todos})
 
-    return <div className="border h-34 w-64 overflow-y-scroll">
+    return <div className="border h-44 w-64 overflow-autoll">
         <div className="flex">
         
-            <input type="text" className="border" onChange={(e)=>setTodo(e.target.value)} />
+            <input type="text" className="border" placeholder="write todos" onChange={(e)=>setTodo(e.target.value)} />
             <button className=" bg-blue-400" onClick={async()=> { const t = await addTodos(todo,id);addTodosStore({label:todo,weeklyId:id,id:t.id,checked:t.checked});}}>add</button>
         </div>
         <div>

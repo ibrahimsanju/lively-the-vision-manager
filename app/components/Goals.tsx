@@ -35,16 +35,24 @@ export const Goals = ({label,id}:goalsprops)=>{
 
     console.log({MONTHLYGOALLLSSS:goals})
 
+
+    function togglediv(){
+        const mydiv = document.getElementById(id)
+        mydiv?.classList.toggle("hidden")
+    }
+
     return <div className="flex flex-col">
         <div className="flex space-x-1">
-            <div>{label}</div>
+            <button className="bg-blue-400 text-white hover:bg-blue-500 cursor-pointer" onClick={()=>{togglediv()}}>O</button>
+            <div className="font-semibold">{label}</div>
             <button className="bg-red-400 text-white hover:bg-red-500 cursor-pointer" onClick={async ()=>{const g = await deleteGoal(id);deleteMainGoal(id)}}>delete</button>
+    
         </div>
         
-        <div>
-            <input type="text" placeholder="write your monthly goals" className="border border-black" onChange={(e)=>setGoal(e.target.value)}/>
-            <button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer" onClick={async()=>{const g = await addMonthly(goal,id); addGoal({label:g.label,id:g.id,userId:g.goalId})}}>add me</button>
-            <div className="border-black border my-3">
+        <div className= "hidden" id={id}  >
+            <input type="text" value={goal} placeholder="write your monthly goals" className="border border-black" onChange={(e)=>setGoal(e.target.value)}/>
+            <button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer" onClick={async()=>{const g = await addMonthly(goal,id); addGoal({label:g.label,id:g.id,userId:g.goalId});setGoal("")}}>add me</button>
+            <div className=" border my-3" id="myDiv" >
                 {goals.filter(item=>item.userId === id).map((goal)=><Monthly key={goal.id} MonthlyId={goal.id} label={goal.label}></Monthly>)}
             </div>
         </div>

@@ -65,7 +65,7 @@ export const Todos = ()=>{
 }
 
     
-    return <div className="flex flex-col items-center">
+    return <div className="flex flex-col items-center ">
         <div className="font-bold text-3xl lg:text-4xl ">Todos</div>
 
         <div className="border h-64 w-64">
