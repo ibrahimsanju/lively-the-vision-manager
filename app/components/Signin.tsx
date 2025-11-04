@@ -2,10 +2,13 @@
 import { useRouter } from "next/navigation"
 import { LabelledInputs } from "./LabelledInputs"
 import { useState } from "react"
+import { Button } from "@/components/ui/button"
 export const Signin = ()=>{
      const [username,setUsername] = useState("")
      const [password,setPassword] = useState("")
      const router = useRouter()
+     console.log(username)
+     console.log(password)
 
     return <div className="h-screen flex justify-center items-center">
         <div className="flex flex-col border items-center py-8 px-4 rounded-2xl">
@@ -16,9 +19,9 @@ export const Signin = ()=>{
             <LabelledInputs label="password" placeholder="1234567" onChange={(e=>{
                 setPassword(e.target.value)
             })}/>
-            <button className="bg-blue-400 hover:bg-blue-500 cursor-pointer text-white rounded p-1" onClick={()=>{
+            <Button className="bg-blue-400 hover:bg-blue-500 cursor-pointer text-white rounded p-1" onClick={()=>{
                 router.push("/")
-            }}>Sign In</button>
+            }}>Sign In</Button>
         </div>
     </div>
 }

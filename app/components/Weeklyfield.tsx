@@ -4,10 +4,7 @@ import { WeeklyFieldComp } from "./WeeklyFieldComp"
 import { useEffect } from "react"
 import { getWeeklyField } from "../actions/user"
 import { WeeklyTodos } from "./weeklyTodos"
-interface WeeklyFieldCompProps{
-    label:string,
-    id?:string
-}
+
 
 
 export const Weeklyfield = ()=>{
@@ -30,15 +27,17 @@ export const Weeklyfield = ()=>{
 
 
     console.log({something:weeklys})
-    return <div>
-        <h1>Weekly</h1>
-        <div className="border h-64 overflow-y-scroll">
+    return <div className="p-10 flex flex-col items-center">
+        <h1 className="text-2xl font-bold">Weekly</h1>
+        <div className="border p-4 ">
             {weeklys.map((weekly) => (
-                <div key={weekly.id}>
+                <div key={weekly.id} >
                     <WeeklyFieldComp  label={weekly.label} id={weekly.id}></WeeklyFieldComp>
+                    <div id={weekly.id} className="">
                     <WeeklyTodos monthlyId={weekly.monthlyId} id={weekly.id}></WeeklyTodos>
+                    </div>
+                    
                 </div>
-                
                 ))}
         </div>
     </div>

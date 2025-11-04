@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
 import { addVision, getVision } from "../actions/user"
-
+import { Button } from "@/components/ui/button"
 
 
 export const Visioninput = ()=>{
@@ -22,7 +22,7 @@ export const Visioninput = ()=>{
 
     return <div className="flex flex-col">
         <textarea name="" id="" className="text-center" placeholder={placeholder||"write your vision"} onChange={(e)=>setVision(e.target.value)} ></textarea>
-        <button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer"onClick={()=>{setPlaceholder(vision);addVision(vision);}}>setvision</button>
+        <Button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer "onClick={()=>{setPlaceholder(vision);addVision(vision);}}>setvision</Button>
     </div>
 }
 

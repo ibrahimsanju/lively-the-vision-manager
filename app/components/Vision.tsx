@@ -4,15 +4,8 @@ import { Visioninput } from "./VisionInput"
 import { Goals } from "./Goals"
 import { addGoal, getGoals } from "../actions/user"
 import { useVisionOutFieldStore } from "@/store/visionStore"
-
-interface goalsprops{
-    label:string,
-    id:string
-}
-
-
-type Goalslist = goalsprops[]
-
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 
 export const Vision = ()=>{
@@ -27,16 +20,16 @@ export const Vision = ()=>{
             setGoals(goals)
         }
         fetchGoals()
-    },[])
+    },[setGoals])
 
     console.log({goals})
     return <div >
     <div className="flex flex-col items-center py-10 ">
         <div className="text-2xl font-bold">Vision</div>
         <Visioninput></Visioninput>
-        <div>
-        <input type="text" placeholder="write your main goals" className="border border-black" onChange={(e)=>setGoal(e.target.value)} />
-        <button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id})}} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</button>
+        <div className="flex items-center justify-center">
+        <Input type="text" placeholder="write your main goals" className="border p-1 rounded" onChange={(e)=>setGoal(e.target.value)} />
+        <Button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id})}} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</Button>
         </div>
     </div>
         <div>

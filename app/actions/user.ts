@@ -60,6 +60,7 @@ export async function deleteGoal(id:string){
             useremail:session.user.email
         }
     })
+    return monthly
 }
 
 export async function getGoals() {
@@ -128,6 +129,7 @@ export async function deleteMonthly(id:string){
             useremail:session.user.email
         }
     })
+    return monthly
 }
 
 export async function addWeekly(label:string,monthlyId:string){
@@ -229,6 +231,7 @@ export async function deleteWeekly(id:string) {
 
     return {
         msg:"successfully deleted",
+        weekly
 
     }
 
@@ -250,6 +253,27 @@ export async function addTodos(label:string,WeeklyId:string){
     })
 
     return {label:todos.label,id:todos.id,WeeklyId:todos.weeklyId,checked:todos.checked,inTodos:todos.inTodos}
+}
+
+export async function deleteTodo(id:string) {
+    const session = await getServerSession()
+    if(!session?.user?.email){
+        throw new Error("User not permitted")
+    }
+
+    const weekly = await prisma.todos.delete({
+        where:{
+            id,
+            useremail:session.user.email
+        }
+    })
+
+    return {
+        msg:"successfully deleted",
+        weekly
+
+    }
+
 }
 
 export async function getTodosField(weeklyId:string) {

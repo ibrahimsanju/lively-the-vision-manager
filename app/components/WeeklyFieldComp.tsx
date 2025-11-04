@@ -1,17 +1,16 @@
-import { useEffect, useState } from "react"
-import { addToWeeklyField, deleteWeekly, getWeeklyField } from "../actions/user"
+import { addToWeeklyField, deleteWeekly } from "../actions/user"
 import { useWeeklyStore } from "@/store/weeklyStore"
 import { useweeklyOutFieldStore } from "@/store/monthlyStore"
+import { Button } from "@/components/ui/button"
 interface WeeklyFieldCompProps{
     label:string,
     id:string
 }
 
-type WeeklysList = WeeklyFieldCompProps[]
+
 
 
 export const WeeklyFieldComp = ({label,id}:WeeklyFieldCompProps)=>{
-    const [weeklys,setWeeklys] = useState<WeeklysList>([])
      const deleWeeklyinField = useWeeklyStore((state)=>state.deleteWeekly)
      const addWeeklyoutField = useweeklyOutFieldStore((state)=>state.addWeekly)
 
@@ -21,14 +20,22 @@ export const WeeklyFieldComp = ({label,id}:WeeklyFieldCompProps)=>{
     //         setWeeklys(weeklys.map(weekly=>({label:weekly.label,id:weekly.id})))
     //     }
     // })
+    function togglediv(){
+        const mydiv = document.getElementById(id)
+        mydiv?.classList.toggle("hidden")
+    }
 
-    return <div className="flex">
-        <h4>
-            {label}
-        </h4>
+    return <div className="flex justify-between">
+        <div className="flex space-x-1">
+            <Button className="bg-green-400 hover:bg-green-500 text-white p-1" onClick={()=>togglediv()}>O</Button>
+            <h4>
+                {label}
+            </h4>
+        </div>
+        
         <div>
-            <button className="bg-green-400 hover:bg-green-500 text-white"onClick={async()=>{ const w = await addToWeeklyField(id); addWeeklyoutField(w);deleWeeklyinField(w.id);}}>add </button>
-            <button className="bg-red-400 hover:bg-red-500 text-white" onClick={async()=>{await deleteWeekly(id); deleWeeklyinField(id);}}>delete</button>
+            <Button className="bg-green-400 hover:bg-green-500 text-white"onClick={async()=>{ const w = await addToWeeklyField(id); addWeeklyoutField(w);deleWeeklyinField(w.id);}}>add </Button>
+            <Button className="bg-red-400 hover:bg-red-500 text-white" onClick={async()=>{await deleteWeekly(id); deleWeeklyinField(id);}}>delete</Button>
         </div>
     </div>
 }

@@ -1,7 +1,7 @@
 import { useGoalOutFieldStore } from "@/store/goalStore"
 import { Weekly } from "./Weekly"
 import { deleteMonthly } from "../actions/user"
-
+import { Button } from "@/components/ui/button"
 interface MonthlyProps{
     label:string,
     MonthlyId:string,
@@ -15,14 +15,14 @@ export const Monthly = ({label,MonthlyId}:MonthlyProps)=>{
     }
 
     const deleteMonthlyStore = useGoalOutFieldStore((state)=>state.deleteGoal)
-    return <div className="border p-2 rounded-2xl overflow-auto m-2">
+    return <div className="border p-2 rounded-2xl m-2">
         <div className="flex space-x-2 pl-1.5">
-            <button className="bg-green-400 hover:bg-green-500 text-white" onClick={()=>togglediv()}>O</button>
+            <Button className="bg-green-400 hover:bg-green-500 text-white p-1" onClick={()=>togglediv()}>O</Button>
             <div>
             {label}
             </div>
             <div>
-                <button className="bg-red-400 hover:bg-red-500 text-white cursor-pointer" onClick={async()=>{  const m =await deleteMonthly(MonthlyId); deleteMonthlyStore(MonthlyId)}}>delete</button>
+                <Button className="bg-red-400 hover:bg-red-500 text-white cursor-pointer" onClick={async()=>{  await deleteMonthly(MonthlyId); deleteMonthlyStore(MonthlyId)}}>delete</Button>
             </div>
         </div>
         <div className="" id={MonthlyId}>

@@ -3,12 +3,9 @@ import { useEffect, useState } from "react"
 import { addWeekly, getWeekly } from "../actions/user"
 import { Subweekly } from "./Subtweekly"
 import { useweeklyOutFieldStore } from "@/store/monthlyStore"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
-interface weeklysProps{
-    label:string,
-    monthlyId:string,
-    id:string
-}
 
 interface weeklyProps{
     id:string
@@ -40,19 +37,19 @@ export const Weekly = ({id}:weeklyProps)=>{
         return ()=>{
             isMounted = false
         }
-    },[id])
+    },[id,setWeeklys])
 
     console.log({weeklys})
 
 
 
-    return <div className="flex flex-col pl-2 " id={id}>
-        <div>
+    return <div className="flex flex-col pl-8 " id={id}>
+        <div className="flex space-x-0.5">
             
-            <input type="text" className="border" placeholder="write weekly goals" onChange={(e)=>setWeekly(e.target.value)}/>
-            <button onClick={async()=>{const w= await addWeekly(weekly,id);  addToWeekly({label:w.label,monthlyId:w.monthlyId,id:w.id})}} className="bg-green-400 hover:bg-green-500 text-white">add</button>
+            <Input type="text" className="w-60" placeholder="write weekly goals" onChange={(e)=>setWeekly(e.target.value)}/>
+            <Button onClick={async()=>{const w= await addWeekly(weekly,id);  addToWeekly({label:w.label,monthlyId:w.monthlyId,id:w.id})}} className="bg-green-400 hover:bg-green-500 text-white">add</Button>
         </div>
-        <div className="h-64 w-64" key='weekly'>
+        <div className="" key='weekly'>
             {weeklys.filter(item => item.monthlyId === id).map(weekly=><Subweekly label={weekly.label} key={weekly.id} id={weekly.id}></Subweekly>)}
         </div>
     </div>
