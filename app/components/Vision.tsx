@@ -23,7 +23,7 @@ export const Vision = ()=>{
     },[setGoals])
 
     console.log({goals})
-    return <div >
+    return <div className="">
     <div className="flex flex-col items-center py-10 ">
         <div className="text-2xl font-bold">Vision</div>
         <Visioninput></Visioninput>
@@ -34,7 +34,7 @@ export const Vision = ()=>{
     </div>
         <div>
             
-            <div className="">
+            <div className=" ">
                 {goals.map((goal)=><Goals id={goal.id} label={goal.label} key={goal.id}/>)}
             </div>
         </div>
