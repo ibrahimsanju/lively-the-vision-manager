@@ -42,7 +42,7 @@ export const Goals = ({label,id}:goalsprops)=>{
         mydiv?.classList.toggle("hidden")
     }
 
-    return <div className=" ">
+    return <div className="py-2 ">
         <div className="flex justify-between">
             <div className="flex space-x-1">
                 <Button className="bg-blue-400 text-white hover:bg-blue-500 cursor-pointer p-1" onClick={()=>{togglediv()}}>O</Button>
@@ -53,12 +53,12 @@ export const Goals = ({label,id}:goalsprops)=>{
         
         
         <div className= "hidden" id={id}  >
-            <div className="px-2 ">
-                <Input type="text" value={goal} placeholder="write your monthly goals" className="border border-black w-60 p-2" onChange={(e)=>setGoal(e.target.value)}/>
+            <div className="pl-2 flex ">
+                <Input type="text" value={goal} placeholder="write your monthly goals" className="border border-black w-50 p-2" onChange={(e)=>setGoal(e.target.value)}/>
                 <Button className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer" onClick={async()=>{const g = await addMonthly(goal,id); addGoal({label:g.label,id:g.id,userId:g.goalId});setGoal("")}}>add me</Button>
             </div>
             
-            <div className="my-2" id="myDiv" >
+            <div className="pl-1" id="myDiv" >
                 {goals.filter(item=>item.userId === id).map((goal)=><Monthly key={goal.id} MonthlyId={goal.id} label={goal.label}></Monthly>)}
             </div>
         </div>

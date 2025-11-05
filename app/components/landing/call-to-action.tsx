@@ -11,7 +11,7 @@ export function CallToAction() {
             <span className="text-sm font-semibold text-accent">Ready to align your goals?</span>
           </div>
 
-          <h2 className="text-4xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-4xl font-bold text-foreground mb-4 text-balance ">
             Transform Your Vision Into Action Today
           </h2>
 

@@ -24,14 +24,16 @@ export const Vision = ()=>{
 
     console.log({goals})
     return <div className="">
-    <div className="flex flex-col items-center py-10 ">
-        <div className="text-2xl font-bold">Vision</div>
+    <div className="">
+        
         <Visioninput></Visioninput>
-        <div className="flex items-center justify-center">
-        <Input type="text" placeholder="write your main goals" className="border p-1 rounded" onChange={(e)=>setGoal(e.target.value)} />
-        <Button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id})}} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</Button>
-        </div>
     </div>
+
+    <div className="flex items-center justify-center p-6">
+            <Input type="text" placeholder="write your main goals" className="border p-1 rounded" onChange={(e)=>setGoal(e.target.value)} />
+            <Button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id})}} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</Button>
+    </div>
+    
         <div>
             
             <div className=" ">

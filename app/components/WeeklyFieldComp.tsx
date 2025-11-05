@@ -25,7 +25,7 @@ export const WeeklyFieldComp = ({label,id}:WeeklyFieldCompProps)=>{
         mydiv?.classList.toggle("hidden")
     }
 
-    return <div className="flex justify-between">
+    return <div className="flex justify-between space-x-1">
         <div className="flex space-x-1">
             <Button className="bg-green-400 hover:bg-green-500 text-white p-1" onClick={()=>togglediv()}>O</Button>
             <h4>
@@ -33,7 +33,7 @@ export const WeeklyFieldComp = ({label,id}:WeeklyFieldCompProps)=>{
             </h4>
         </div>
         
-        <div>
+        <div className="flex">
             <Button className="bg-green-400 hover:bg-green-500 text-white"onClick={async()=>{ const w = await addToWeeklyField(id); addWeeklyoutField(w);deleWeeklyinField(w.id);}}>add </Button>
             <Button className="bg-red-400 hover:bg-red-500 text-white" onClick={async()=>{await deleteWeekly(id); deleWeeklyinField(id);}}>delete</Button>
         </div>

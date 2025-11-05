@@ -5,11 +5,11 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden pt-20 pb-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto text-center">
-        <div className="inline-block mb-6 px-4 py-2 rounded-full bg-accent/10 border border-accent/20">
-          <p className="text-sm font-medium text-accent">Transform Your Goals Into Reality</p>
+        <div className="inline-block mb-6 px-4 py-2 rounded-full bg-blue-300/10 border border-blue-400/20">
+          <p className="text-sm font-medium text-blue-500">Transform Your Goals Into Reality</p>
         </div>
 
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-balance mb-6 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-balance mb-6 bg-gradient-to-r from-purple-600 via-blue-500 to-purple-600 bg-clip-text text-transparent">
           Your Vision. Your Path. Your Success.
         </h1>
 

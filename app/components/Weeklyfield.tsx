@@ -27,11 +27,11 @@ export const Weeklyfield = ()=>{
 
 
     console.log({something:weeklys})
-    return <div className="p-10 flex flex-col items-center">
+    return <div className="p-4 flex flex-col items-center">
         <h1 className="text-2xl font-bold">Weekly</h1>
-        <div className="border p-4 ">
+        <div className="border p-4 rounded-2xl">
             {weeklys.map((weekly) => (
-                <div key={weekly.id} >
+                <div key={weekly.id} className="p-2">
                     <WeeklyFieldComp  label={weekly.label} id={weekly.id}></WeeklyFieldComp>
                     <div id={weekly.id} className="">
                     <WeeklyTodos monthlyId={weekly.monthlyId} id={weekly.id}></WeeklyTodos>

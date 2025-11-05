@@ -11,10 +11,10 @@ interface TodoComponentProps{
 }
 
 export const TodoComponent = ({label,onClick,onCheck,checked,onClickDelete}:TodoComponentProps)=>{
-    return <div className="flex flex-row items-center justify-between w-full">
+    return <div className="flex flex-row items-center justify-between ">
         <div className="flex space-x-1">
             <input onChange={onCheck} checked={checked} type="checkbox" className="w-5"/>
-            <div>{label}</div>
+            <div className="">{label}</div>
         </div>
         <div className="flex space-x-0.5">
             <Button onClick={onClick} className="bg-blue-400 hover:bg-blue-500 text-white p-2">add</Button>
