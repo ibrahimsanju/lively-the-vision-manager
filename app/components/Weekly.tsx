@@ -46,8 +46,8 @@ export const Weekly = ({id}:weeklyProps)=>{
     return <div className="flex flex-col pl-8 " id={id}>
         <div className="flex space-x-0.5">
             
-            <Input type="text" className="w-60" placeholder="write weekly goals" onChange={(e)=>setWeekly(e.target.value)}/>
-            <Button onClick={async()=>{const w= await addWeekly(weekly,id);  addToWeekly({label:w.label,monthlyId:w.monthlyId,id:w.id})}} className="bg-green-400 hover:bg-green-500 text-white">add</Button>
+            <Input type="text" value={weekly} className="w-50" placeholder="write weekly goals" onChange={(e)=>setWeekly(e.target.value)}/>
+            <Button onClick={async()=>{const w= await addWeekly(weekly,id);  addToWeekly({label:w.label,monthlyId:w.monthlyId,id:w.id}); setWeekly("")}} className="bg-green-400 hover:bg-green-500 text-white">add</Button>
         </div>
         <div className="" key='weekly'>
             {weeklys.filter(item => item.monthlyId === id).map(weekly=><Subweekly label={weekly.label} key={weekly.id} id={weekly.id}></Subweekly>)}

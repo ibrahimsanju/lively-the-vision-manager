@@ -61,7 +61,7 @@ export const Todos = ()=>{
 
     
     return <div className="flex flex-col items-center ">
-        <div className="font-bold text-3xl lg:text-4xl ">Todos</div>
+        <div className="font-bold text-3xl lg:text-3xl ">Todos</div>
 
         <div className="border h-64 w-90">
             <Button className=" bg-pink-400 text-white hover:bg-pink-500 cursor-pointer" onClick={flushTodos}>flush</Button>

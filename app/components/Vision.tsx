@@ -30,8 +30,8 @@ export const Vision = ()=>{
     </div>
 
     <div className="flex items-center justify-center p-6">
-            <Input type="text" placeholder="write your main goals" className="border p-1 rounded" onChange={(e)=>setGoal(e.target.value)} />
-            <Button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id})}} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</Button>
+            <Input type="text" value={goal} placeholder="write your main goals" className="border p-1 rounded" onChange={(e)=>setGoal(e.target.value)} />
+            <Button onClick={async()=>{const g = await addGoal(goal); addGoals({label:g.label,id:g.id}); setGoal("")  }} className="bg-blue-400 hover:bg-blue-500 text-white rounded-lg cursor-pointer">add goal</Button>
     </div>
     
         <div>

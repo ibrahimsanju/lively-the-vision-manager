@@ -21,12 +21,13 @@ import { Input } from "@/components/ui/input"
 
 interface weeklyTodosProps{
     monthlyId?:string,
-    id:string
+    id:string,
+    compact?:boolean
 }
 
 
 
-export const WeeklyTodos = ({id}:weeklyTodosProps)=> {
+export const WeeklyTodos = ({id,compact}:weeklyTodosProps)=> {
     const setTodos = useTodoStore((state)=>state.setTodos)
     const addTodosStore = useTodoStore((state)=>state.addTodo)
     const addinTodoStore = useInTodoStore((state)=>state.addTodo)
@@ -56,11 +57,11 @@ export const WeeklyTodos = ({id}:weeklyTodosProps)=> {
 
     return <div className="relative  overflow-auto px-1 mx-4">
         <div className="flex space-x-0.5 pt-0.5">
-            <Input type="text" className="border w-50" placeholder="write todos" onChange={(e)=>setTodo(e.target.value)} />
-            <Button className="sticky top-0 right-0 bg-blue-400" onClick={async()=> { const t = await addTodos(todo,id);addTodosStore({label:todo,weeklyId:id,id:t.id,checked:t.checked});}}>add</Button>
+            <Input type="text" value={todo} className="border w-50" placeholder="write todos" onChange={(e)=>setTodo(e.target.value)} />
+            <Button className="sticky top-0 right-0 bg-blue-400" onClick={async()=> { const t = await addTodos(todo,id);addTodosStore({label:todo,weeklyId:id,id:t.id,checked:t.checked});setTodo("") }}>add</Button>
         </div>
         <div className="pt-2">
-            {Todos.filter(item => item.weeklyId == id).map((t)=><TodoComponent key={t.id} label={t.label} onClick={async()=>{
+            {Todos.filter(item => item.weeklyId == id).map((t)=><TodoComponent compact={compact} key={t.id} label={t.label} onClick={async()=>{
                 const to = await addToTodosField(t.id)
                 deleteTodoStore(to)
                 addinTodoStore(to)

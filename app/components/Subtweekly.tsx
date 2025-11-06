@@ -33,7 +33,7 @@ export const Subweekly = ({label,id}:SubweeklyProps)=>{
             <Button className="bg-green-400 hover:bg-green-500 text-white" onClick={async()=>{const w = await addToWeeklyField(id); addWeekly(w.label,w.id,w.monthlyId); deletefromWeekly(w.id)}}> add </Button>
         </div>
         <div className="" id={id}>
-            <WeeklyTodos id={id}/>
+            <WeeklyTodos compact={true} id={id}/>
         </div>
         
     </div>
